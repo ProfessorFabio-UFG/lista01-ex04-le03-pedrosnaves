@@ -1,5 +1,4 @@
 public class Robo {
-
     private int id;
     private String status;
     private int posicaox;
@@ -16,53 +15,74 @@ public class Robo {
         this.lmt_po = lmt_po;
     }
 
-    public void ligar(){
-        this.status = "ligado";
+    public int getID() {
+        return this.id;
     }
 
-    public void desligar(){
-        this.status = "desligado";
+    public String getStatus() {
+        return this.status;
     }
 
+    public int getPosX() {
+        return this.posicaox;
+    }
 
+    public int getPosY() {
+        return this.posicaoy;
+    }
 
-    public void andar(int dx, int dy){
-        if(status.equals("desligado")) {
+    public int getQtdPo() {
+        return this.qnt_po;
+    }
+
+    public int getLmtPo() {
+        return this.lmt_po;
+    }
+
+    public void setLigar() {
+        this.status = "Ligado";
+    }
+
+    public void setDesligar() {
+        this.status = "Desligado";
+    }
+
+    public void setAndar(int dx, int dy) {
+        if(status.equals("Desligado")) {
             System.out.println("Ligue o Robo");
             return;
         }
-
         this.posicaox += dx;
         this.posicaoy += dy;
-        this.status = "andando";
+        this.status = "Andando";
     }
 
-    public void aspirar(int quantidade){
-        if (!status.equals("ligado") && !status.equals("andando")){
-            System.out.println("Ligue o Robo");
-            return;
-        }
-        this.qnt_po += quantidade;
-        if (qnt_po >= lmt_po){
+    public void setAspirar(int quantidade) {
+        if(!status.equals("Ligado") && !status.equals("Andando")) {
             System.out.println("Limite de pó atingido! Robo desligando");
-            desligar();
+            setDesligar();
+        }
+        this.qnt_po +=quantidade;
+        if(qnt_po >= lmt_po) {
+            System.out.println("Robô " + this.id + " atingiu o limite de pó! Desligando...");
+            setDesligar();
         }
     }
 
-    public void parar(){
-        if (!status.equals("andando")) {
+    public void setParar() {
+        if(!status.equals("Andando")) {
             System.out.println("ERRO: Robo está desligado ou parado");
-            return;
+            return; 
         }
-        this.status = "parado";
+        this.status = "Parado";
     }
 
     public String toString(){
-        return "Robô " + id +
-                "\nstatus :" + status +
-                "\nPosição: (" + posicaox + ", " + posicaoy + ")" +
-                "\nQuantidade de pó: " + qnt_po +
-                "\nLimite de pó :" + lmt_po +
+        return "Robô " + getID() +
+                "\nstatus :" + getStatus() +
+                "\nPosição: (" + getPosX() + ", " + getPosY() + ")" +
+                "\nQuantidade de pó: " + getQtdPo() +
+                "\nLimite de pó :" + getLmtPo() +
                 "\n-----------------\n";
     }
 
